@@ -20,7 +20,7 @@ async function execute(interaction, player) {
         const embed = new EmbedBuilder().setTitle('Error')
             .setDescription('The track is already paused')
 
-        return interaction.editReply({ embeds: [embed] });
+        return interaction.followUp({ embeds: [embed] });
     }
 
     timeline.pause();
@@ -28,7 +28,7 @@ async function execute(interaction, player) {
     const embed = new EmbedBuilder().setTitle('Paused')
         .setDescription('I have successfully paused the track.')
 
-    return interaction.editReply({ embeds: [embed] });
+    return interaction.followUp({ embeds: [embed] });
 }
 
 export default { data, execute };

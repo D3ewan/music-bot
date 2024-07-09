@@ -12,22 +12,22 @@ async function execute(interaction, player) {
         const embed = new EmbedBuilder().setTitle('Not playing')
             .setDescription('I am not playing anything right now');
 
-        return interaction.editReply({ embeds: [embed] });
+        return interaction.followUp({ embeds: [embed] });
     }
 
     if (!timeline.paused) {
         const embed = new EmbedBuilder().setTitle('Error')
             .setDescription('The track is already running')
 
-        return interaction.editReply({ embeds: [embed] });
+        return interaction.followUp({ embeds: [embed] });
     }
 
     timeline.resume();
 
-    const embed = new EmbedBuilder().setTitle('')
+    const embed = new EmbedBuilder().setTitle('Resumed')
         .setDescription('I have successfully resumed the track.')
 
-    return interaction.editReply({ embeds: [embed] });
+    return interaction.followUp({ embeds: [embed] });
 }
 
 export default { data, execute };

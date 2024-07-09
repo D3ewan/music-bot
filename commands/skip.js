@@ -20,7 +20,7 @@ async function execute(interaction, player) {
     const embed = new EmbedBuilder().setTitle('Track skipped!')
         .setDescription('I have successfully skipped to the next track.');
 
-    return interaction.editReply({ embeds: [embed] });
+    return interaction.followUp({ embeds: [embed] });
 }
 
 export default { data, execute };

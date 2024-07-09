@@ -12,7 +12,7 @@ async function execute(interaction, player) {
         const embed = new EmbedBuilder().setTitle('Not playing')
             .setDescription('I am not playing anything right now');
 
-        return interaction.editReply({ embeds: [embed] });
+        return interaction.followUp({ embeds: [embed] });
     }
 
     queue.node.stop();
@@ -20,6 +20,6 @@ async function execute(interaction, player) {
     const embed = new EmbedBuilder().setTitle('Track Stopped')
         .setDescription('I have successfully stopped the track.')
 
-    return interaction.editReply({ embeds: [embed] });
+    return interaction.followUp({ embeds: [embed] });
 }
 export default { data, execute };
