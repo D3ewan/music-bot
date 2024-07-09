@@ -1,4 +1,3 @@
-import { Player, QueryType } from 'discord-player';
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 
 const data = new SlashCommandBuilder()
