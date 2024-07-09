@@ -6,12 +6,21 @@ const data = new SlashCommandBuilder().setName('skip')
 
 async function execute(interaction, player) {
     await interaction.deferReply();
+
     const queue = useQueue(interaction.guild);
-    if (!queue || !queue.isPlaying()) return void interaction.followUp({ content: "❌ | No music is being played!" });
-    const success = queue.node.skip();
-    return void interaction.followUp({
-        content: success ? `✅ | Skipped **${currentTrack}**!` : "❌ | Something went wrong!"
-    });
+
+    if (!queue?.isPlaying()) {
+        const embed = new EmbedBuilder().setTitle('Not Playing')
+            .setDescription('I am not playing anything now')
+        return interaction.editReply({ embeds: [embed] });
+    }
+
+    queue.node.skip();
+
+    const embed = new EmbedBuilder().setTitle('Track skipped!')
+        .setDescription('I have successfully skipped to the next track.');
+
+    return interaction.editReply({ embeds: [embed] });
 }
 
 export default { data, execute };

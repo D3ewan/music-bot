@@ -1,15 +1,34 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
-import { useQueue } from 'discord-player';
+import { useQueue, useTimeline } from 'discord-player';
 
 const data = new SlashCommandBuilder().setName('pause')
     .setDescription('pause the current song');
 
 async function execute(interaction, player) {
     await interaction.deferReply();
-    const queue = useQueue(interaction.guild);
-    if (!queue || !queue.isPlaying()) return void interaction.followUp({ content: "❌ | No music is being played!" });
-    queue.node.pause();
-    return void interaction.followUp({ content: "paused the music" });
+
+    const timeline = useTimeline(interaction.guildId);
+
+    if (!timeline?.track) {
+        const embed = new EmbedBuilder().setTitle('Not playing')
+            .setDescription('I am not playing anything right now');
+
+        return interaction.editReply({ embeds: [embed] });
+    }
+
+    if (timeline.paused) {
+        const embed = new EmbedBuilder().setTitle('Error')
+            .setDescription('The track is already paused')
+
+        return interaction.editReply({ embeds: [embed] });
+    }
+
+    timeline.pause();
+
+    const embed = new EmbedBuilder().setTitle('Paused')
+        .setDescription('I have successfully paused the track.')
+
+    return interaction.editReply({ embeds: [embed] });
 }
 
 export default { data, execute };
