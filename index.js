@@ -10,6 +10,7 @@ import Skip from './commands/skip.js';
 import Pause from './commands/pause.js';
 import Resume from './commands/resume.js';
 import Stop from './commands/stop.js';
+import Lyrics from './commands/lyrics.js'
 
 dotenv.config();
 
@@ -35,11 +36,13 @@ client.commands.set(Skip.data.name, Skip.execute);
 client.commands.set(Pause.data.name, Pause.execute);
 client.commands.set(Resume.data.name, Resume.execute);
 client.commands.set(Stop.data.name, Stop.execute);
+client.commands.set(Lyrics.data.name,Lyrics.execute);
 commands.push(Play.data.toJSON());
 commands.push(Skip.data.toJSON());
 commands.push(Pause.data.toJSON());
 commands.push(Resume.data.toJSON());
 commands.push(Stop.data.toJSON());
+commands.push(Lyrics.data.toJSON());
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);

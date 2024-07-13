@@ -33,6 +33,7 @@ async function execute(interaction, player) {
     }
     const embed = new EmbedBuilder().setTitle(`${searchResult.hasPlaylist() ? 'Playlist' : 'Track'} queued!`)
         .setThumbnail(track.thumbnail)
+        .setURL(track.url)
         .setDescription(track.description)
         .setTimestamp(new Date())
         .setFooter({ text: `Duration: ${track.duration}`});
